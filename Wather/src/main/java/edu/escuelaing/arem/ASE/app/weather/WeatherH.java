@@ -1,6 +1,5 @@
 package edu.escuelaing.arem.ASE.app.weather;
 
-//import edu.eci.arep.cache.WeatherCache;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -46,12 +45,12 @@ public class WeatherH{
     }
 
     private static String getData(String place, String URL) throws IOException {
-        String cachedPlace = WeatherCache.searchPlace(place);
+        String cachedPlace = weatherdata.searchPlace(place);
         String data;
         if (cachedPlace == null) {
             System.out.println("NOT CACHED");
             data = readURL(URL);
-            WeatherCache.putPlace(place, data);
+            weatherdata.putPlace(place, data);
             return data;
         } else {
             System.out.println("CACHED");

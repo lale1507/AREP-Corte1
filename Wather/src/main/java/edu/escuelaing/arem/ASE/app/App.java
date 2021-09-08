@@ -1,12 +1,11 @@
 package edu.escuelaing.arem.ASE.app;
 
-import com.google.gson.Gson;
 import edu.escuelaing.arem.ASE.app.weather.WeatherH;
+import spark.Request;
+import spark.Response;
 
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
-
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.port;
 
 /**
  * Hello world!
@@ -15,9 +14,11 @@ import static spark.Spark.*;
 public class App {
     public static void main(String[] args) {
         port(getPort());
-        Gson gson = new Gson();
-
         get("/clima", WeatherH.handle);
+        get("/", (Request req, Response res) -> {
+            res.redirect("/clima");
+            return null;
+        });
 
     }
 
